@@ -274,8 +274,10 @@
       document.getElementById("langBtn").textContent = t.toggle;
     }
 
-    let current = localStorage.getItem("lang") || "ar";
-    if (current !== "ar" && current !== "en") current = "ar";
+    // Arabic is the default for first-time visitors. A returning visitor keeps
+    // whatever language they last chose (saved in localStorage).
+    const saved = localStorage.getItem("lang");
+    let current = saved === "en" ? "en" : "ar";
     render(current);
 
     document.getElementById("langBtn").addEventListener("click", function () {
